@@ -4,5 +4,5 @@
     <option name="sdkName" value="Python 3.12 (cms_adapter)" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (sendy-semantic-api)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 virtualenv at ~/project/julu1/llm-demo/.venv" project-jdk-type="Python SDK" />
 </project>

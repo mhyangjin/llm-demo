@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from fastmcp import Client
-from mcp_server.models import ResolveQueryRequest
+from demo.models import ResolveQueryRequest, ResolveQueryResponse
 
 class SemanticClient:
     """

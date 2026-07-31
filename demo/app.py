@@ -20,10 +20,11 @@ from __future__ import annotations
 
 import asyncio
 import json
-
-from demo.fake_llm import FakeLLM
+import os
+from demo.llm.llm import LLM
+from demo.runtime.fake_runtime import FakeRuntime
+from demo.runtime.sagemaker_runtime import SageMakerRuntime
 from demo.semantic_client import SemanticClient
-
 
 LINE = "=" * 80
 
@@ -39,8 +40,21 @@ async def run(question: str) -> None:
     """
     Execute the complete Text-to-SQL flow.
     """
+    USE_FAKE = os.getenv("USE_FAKE", "false").lower() == "true"
 
-    llm = FakeLLM()
+    if USE_FAKE :
+        print("Using FakeRuntime")
+        runtime = FakeRuntime()
+    else :
+        print("Using SageMakerRuntime")
+        runtime = SageMakerRuntime(
+                endpoint_name="semantic-agent",
+                region_name="ap-northeast-2",
+        )
+
+    llm = LLM(runtime)
+
+
 
     async with SemanticClient() as semantic:
 
@@ -77,18 +91,9 @@ async def run(question: str) -> None:
             semantic_request
         )
 
-        #
-        # SemanticClient currently returns dict
-        #
-
-        if hasattr(semantic_response, "model_dump"):
-            body = semantic_response.model_dump()
-        else:
-            body = semantic_response
-
         print(
             json.dumps(
-                body,
+                semantic_response.model_dump(),
                 indent=2,
                 ensure_ascii=False,
             )
