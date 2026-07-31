@@ -8,6 +8,9 @@
 
 GitHub Copilot을 이용한 테스트 가이드입니다.
 
+이 프로젝트는 LLM에 자연어 질문을 입력하면 MCP를 통해 Semantic Layer를 호출해 Athena SQL을 생성하는 데모입니다.
+이를 통해 사내에서 정의한 테이블/메타데이터를 LLM에 직접 노출하지 않고도 SQL을 생성할 수 있습니다.
+
 ### 사전 준비
 
 LLM Demo를 테스트하기 전에 `semantic-api` 프로젝트의 MCP Server를 먼저 실행해야 합니다.
@@ -89,6 +92,9 @@ LLM은 메트릭, 차원, 필터, 테이블을 직접 추론해서는 안 되며
 ## English
 
 Testing guide with GitHub Copilot.
+
+This project is a demo where a natural language question is sent to an LLM, and SQL is generated via MCP by calling the Semantic Layer.
+This allows SQL generation without directly exposing internally defined table details/metadata to the LLM.
 
 ### Prerequisites
 
