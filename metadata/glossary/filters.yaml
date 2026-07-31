@@ -1,0 +1,315 @@
+version: 1.0
+
+filters:
+  #
+  # 결과(Result)
+  #
+  - term: 성공
+    filters:
+      - dimension: result
+        operator: "="
+        value: SUCCESS
+    aliases:
+      - 성공건
+      - 성공한
+      - 발송 성공
+    description: >
+      발송 결과가 SUCCESS인 데이터
+
+  - term: 실패
+    filters:
+      - dimension: result
+        operator: "="
+        value: FAIL
+    aliases:
+      - 실패건
+      - 발송 실패
+    description: >
+      발송 결과가 FAIL인 데이터
+
+  - term: 요청 실패
+    aliases:
+      - 요청 실패 건
+      - 요청 실패건
+      - Request Fail
+      - REQUEST FAIL
+    filters:
+      - dimension: status
+        operator: "="
+        value: REQUEST
+      - dimension: result
+        operator: "="
+        value: FAIL
+    description: >
+      요청 단계에서 실패한 메시지
+
+  - term: 요청 성공
+    aliases:
+      - 요청 성공 건
+      - 요청 성공건
+      - Request
+      - REQUEST
+    filters:
+      - dimension: status
+        operator: "="
+        value: REQUEST
+      - dimension: result
+        operator: "="
+        value: SUCCESS
+    description: >
+      요청이 완료된 메시지
+
+  - term: 발송 성공
+    aliases:
+      - 발송 성공 건
+      - 발송 성공건
+      - delivery succeeded
+      - DELIVERY SUCCEEDED
+    filters:
+      - dimension: status
+        operator: "!="
+        value: REQUEST
+      - dimension: result
+        operator: "="
+        value: SUCCESS
+    description: >
+      요청이 완료된 메시지
+
+  #
+  # 상태(Status)
+  #
+  - term: 요청
+    filter:
+      dimension: status
+      operator: "="
+      value: REQUEST
+    aliases:
+      - 요청 상태
+
+  - term: 발송
+    filter:
+      dimension: status
+      operator: "!="
+      value: REQUEST
+    aliases:
+      - 발송 채널 상태
+
+  #
+  # Channel
+  #
+  - term: SMS
+    filter:
+      dimension: channel
+      operator: "="
+      value: SMS
+    aliases:
+      - 문자
+      - 단문
+
+  - term: LMS
+    filter:
+      dimension: channel
+      operator: "="
+      value: LMS
+
+  - term: MMS
+    filter:
+      dimension: channel
+      operator: "="
+      value: MMS
+
+  - term: 알림톡
+    filter:
+      dimension: channel
+      operator: "="
+      value: KAKAO_ALIMTALK
+    aliases:
+      - 카카오 알림톡
+
+  - term: 친구톡
+    filter:
+      dimension: channel
+      operator: "="
+      value: KAKAO_FRIENDTALK
+
+  - term: 이메일
+    filter:
+      dimension: channel
+      operator: "="
+      value: EMAIL
+    aliases:
+      - Email
+
+  - term: 푸시
+    filter:
+      dimension: channel
+      operator: "="
+      value: PUSH
+    aliases:
+      - Push
+
+  #
+  # Notification Type
+  #
+  - term: 광고
+    filter:
+      dimension: notification_type
+      operator: "="
+      value: ad
+    aliases:
+      - 광고성
+
+  - term: 정보성
+    filter:
+      dimension: notification_type
+      operator: "="
+      value: info
+
+
+  #
+  # 날짜(Date)
+  #
+  - term: 오늘
+    filters:
+      - dimension: request_date
+        operator: "="
+        value: today
+    aliases:
+      - 금일
+      - 오늘 날짜
+    description: >
+      오늘 날짜의 데이터
+
+  - term: 어제
+    filters:
+      - dimension: request_date
+        operator: "="
+        value: yesterday
+    aliases:
+      - 전일
+      - 어제 날짜
+    description: >
+      어제 날짜의 데이터
+
+  - term: 이번 주
+    filters:
+      - dimension: request_date
+        operator: between
+        value: current_week
+    aliases:
+      - 금주
+      - 이번주
+    description: >
+      이번 주의 데이터
+
+  - term: 지난 주
+    filters:
+      - dimension: request_date
+        operator: between
+        value: previous_week
+    aliases:
+      - 지난주
+      - 전주
+      - 저번 주
+      - 저번주
+    description: >
+      지난 주의 데이터
+
+  - term: 이번 달
+    filters:
+      - dimension: request_date
+        operator: between
+        value: current_month
+    aliases:
+      - 이번달
+      - 금월
+      - 이번 월
+    description: >
+      이번 달의 데이터
+
+  - term: 지난 달
+    filters:
+      - dimension: request_date
+        operator: between
+        value: previous_month
+    aliases:
+      - 지난달
+      - 전월
+      - 저번 달
+      - 저번달
+      - 지난 월
+    description: >
+      지난 달의 데이터
+
+  - term: 올해
+    filters:
+      - dimension: request_date
+        operator: between
+        value: current_year
+    aliases:
+      - 금년
+      - 이번 해
+      - 이번해
+      - 이번 년
+    description: >
+      올해의 데이터
+
+  - term: 작년
+    filters:
+      - dimension: request_date
+        operator: between
+        value: previous_year
+    aliases:
+      - 전년
+      - 작년도
+      - 지난 해
+      - 지난해
+    description: >
+      작년의 데이터
+
+  - term: 최근 7일
+    filters:
+      - dimension: request_date
+        operator: between
+        value: last_7_days
+    aliases:
+      - 최근 7일간
+      - 지난 7일
+      - 지난 7일간
+      - 7일 이내
+    description: >
+      최근 7일간의 데이터
+
+  - term: 최근 30일
+    filters:
+      - dimension: request_date
+        operator: between
+        value: last_30_days
+    aliases:
+      - 최근 30일간
+      - 지난 30일
+      - 지난 30일간
+      - 30일 이내
+    description: >
+      최근 30일간의 데이터
+
+  #
+  # Open
+  #
+  - term: 읽은
+    filter:
+      dimension: is_open
+      operator: "="
+      value: "Y"
+    aliases:
+      - 오픈
+      - 열람
+
+  - term: 읽지 않은
+    filter:
+      dimension: is_open
+      operator: "!="
+      value: "Y"
+    aliases:
+      - 미열람
+      - 오픈 안한

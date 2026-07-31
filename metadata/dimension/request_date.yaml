@@ -1,0 +1,22 @@
+dimension_id: request_date
+business_name: 발송 일자
+description: >
+  한국시간(KST) 기준 발송 요청 날짜
+
+mappings:
+  - table: notifications
+    column: request_kst_date
+
+  - table: notification_index
+    column: occurred_at
+    transform:
+      type: datetime
+      source_timezone: UTC
+      target_timezone: Asia/Seoul
+      output: date
+      format: yyyy-MM-dd
+
+joins:
+  - notification_status
+  - recipient
+  - notifications

@@ -1,0 +1,86 @@
+table_name: notifications
+business_name: 발송 요청
+description: >
+  발송 요청의 상세 정보를 담고 있는 테이블입니다.
+
+owner: Sendy
+refresh_cycle: hourly
+
+joins:
+
+  - table: notification_channels
+    type: inner
+    purpose: 발송 요청의 채널 라우팅 정보를 조회
+    join_cardinality: one_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+  - table: notification_index
+    type: inner
+    purpose: 여러 인덱스 조건에 따라 인덱스 테이블과 조인하여 발송 요청 정보를 조회
+    join_cardinality: one_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+  - table: notification_status
+    type: inner
+    purpose: 발송 요청의 상태 정보를 조회
+    join_cardinality: one_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+      - left: status
+        operator: "="
+        right: request_channel_id
+        required: false
+        use_when:
+          - 채널별 조회
+          - 채널별 성공율
+          - 라우팅 분석
+
+  - table: inbox
+    type: inner
+    purpose: 읽음 여부를 조회
+    join_cardinality: one_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+  - table: recipient
+    type: inner
+    purpose: 발송 요청의 수신자 정보를 조회
+    join_cardinality: one_to_many
+    entity_cardinality: many_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+columns:
+  - name: notification_id
+    business_name: 발송 요청 ID
+    type: string
+    description: 발송 요청의 고유 식별자
+
+  - name: info
+    business_name: 메시지의 상세 정보
+    type:
+
+  - name: request_channel_id
+    business_name: 요청 채널
+    type: string
+
+  - name: request_kst_date
+    business_name: 한국기준 요청 날짜
+    type: string

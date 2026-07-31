@@ -1,0 +1,10 @@
+dimension_id: status
+business_name: 처리 상태
+description: >
+  처리 단계 또는 채널 상태(REQUEST/SMS/LMS/...)
+mappings:
+  - table: notification_status
+    column: status
+joins:
+  - notifications
+  - recipient

@@ -1,0 +1,22 @@
+pattern_id: customer_fatigue
+
+business_name: 고객 피로도
+
+description: >
+  고객에게 하루 동안 발송된 메시지 수를 채널과 메시지 유형별로 분석한다.
+
+metric:
+  - request_count
+
+dimensions:
+  - customer
+  - request_date
+  - channel
+  - notification_type
+
+default_sort:
+  - metric: request_count
+    direction: desc
+
+purpose:
+  - fatigue_analysis

@@ -1,0 +1,47 @@
+table_name: notification_channels
+business_name: 발송 채널 라우팅
+
+description: >
+  발송 요청의 채널 라우팅 정보를 저장한다.
+
+owner: Sendy
+refresh_cycle: hourly
+
+joins:
+  - table: notifications
+    type: inner
+    purpose: 발송 요청의 채널 라우팅 정보를 조회
+    join_cardinality: many_to_one
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+  - table: notification_status
+    type: inner
+    purpose: 채널별 발송 결과를 조회
+    join_cardinality: one_to_many
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+      - left: channel_id
+        operator: "="
+        right: status
+        required: false
+
+columns:
+  - name: notification_id
+    business_name: 발송 요청 ID
+    type: string
+
+  - name: request_channel_id
+    business_name: 요청 채널 ID
+    type: string
+
+  - name: channel_id
+    business_name: 실제 발송 채널 ID
+    type: string
+

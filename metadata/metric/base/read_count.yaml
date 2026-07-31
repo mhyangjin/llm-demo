@@ -1,0 +1,17 @@
+metric_name: read_count
+business_name: 읽음 건수
+description: >
+  메세지를 읽은 건수  
+
+aggregate: count
+table: inbox
+filter:
+  - column: is_open
+    operator: "="
+    value: "Y"
+
+supported_dimensions:
+  - channel
+  - customer
+default_dimension:
+  - request_date

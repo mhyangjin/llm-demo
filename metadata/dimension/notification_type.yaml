@@ -1,0 +1,10 @@
+dimension_id: notification_type
+business_name: 메시지 유형
+description: >
+  광고성(ad) / 정보성(info) 발송 유형
+mappings:
+  - table: recipient
+    column: notification_type
+joins:
+  - notification_status
+  - notifications

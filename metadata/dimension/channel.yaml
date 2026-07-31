@@ -1,0 +1,11 @@
+dimension_id: channel
+business_name: 채널
+
+mappings:
+  - table: notification_channels
+    column: request_channel_id
+  - table: notification_channels
+    column: channel_id
+
+joins:
+  - notification_status

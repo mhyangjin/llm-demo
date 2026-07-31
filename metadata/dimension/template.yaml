@@ -1,0 +1,15 @@
+dimension_id: template
+business_name: 템플릿
+
+mappings:
+  - table: notification_index
+    column: index
+    pattern:
+      prefix: TEMP#
+      extract: suffix
+
+joins:
+  - notifications
+  - notification_status
+  - notification_channels
+  - recipient

@@ -1,0 +1,16 @@
+dimension_id: customer
+business_name: 고객번호
+
+mapping:
+  - table: inbox
+    resolver:
+      column: customer_id
+
+  - table: recipient
+    resolver:
+      column: custom_message_id
+      pipeline:
+        - split:
+            delimiter: "."
+            index: 0
+        - base64_decode: { }

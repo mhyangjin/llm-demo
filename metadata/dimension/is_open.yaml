@@ -1,0 +1,13 @@
+dimension_id: is_open
+business_name: 읽음 여부
+
+description: >
+  고객 읽음 여부(Y/N)
+
+mappings:
+  - table: inbox
+    column: is_open
+
+joins:
+  - notifications
+  - recipient

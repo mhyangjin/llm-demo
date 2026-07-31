@@ -1,0 +1,68 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="aenum" />
+          <option value="aiohappyeyeballs" />
+          <option value="aiohttp" />
+          <option value="aiosignal" />
+          <option value="annotated-types" />
+          <option value="anyio" />
+          <option value="attrs" />
+          <option value="certifi" />
+          <option value="click" />
+          <option value="colorlog" />
+          <option value="coverage" />
+          <option value="fastapi" />
+          <option value="frozenlist" />
+          <option value="h11" />
+          <option value="httpcore" />
+          <option value="httpx" />
+          <option value="idna" />
+          <option value="iniconfig" />
+          <option value="isodate" />
+          <option value="JSON-log-formatter" />
+          <option value="logger" />
+          <option value="lxml" />
+          <option value="multidict" />
+          <option value="packaging" />
+          <option value="pluggy" />
+          <option value="propcache" />
+          <option value="pydantic" />
+          <option value="pydantic-settings" />
+          <option value="pydantic_core" />
+          <option value="PyJWT" />
+          <option value="pytest" />
+          <option value="pytest-cov" />
+          <option value="python-dotenv" />
+          <option value="python-multipart" />
+          <option value="pytz" />
+          <option value="PyYAML" />
+          <option value="setuptools" />
+          <option value="sniffio" />
+          <option value="starlette" />
+          <option value="toml" />
+          <option value="typing-inspection" />
+          <option value="typing_extensions" />
+          <option value="urllib3" />
+          <option value="uuid6" />
+          <option value="uvicorn" />
+          <option value="yarl" />
+          <option value="aioboto3" />
+          <option value="aiobotocore" />
+          <option value="aiofiles" />
+          <option value="aioitertools" />
+          <option value="boto3" />
+          <option value="botocore" />
+          <option value="jmespath" />
+          <option value="python-dateutil" />
+          <option value="s3transfer" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>

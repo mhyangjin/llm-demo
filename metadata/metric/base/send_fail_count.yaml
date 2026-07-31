@@ -1,0 +1,29 @@
+metric_name: send_fail_count
+business_name: 발송사 실패 건수
+description: >
+  발송사에서 발송 실패한 전체 건수
+
+aggregate: count
+table: notification_status
+
+filter:
+  - column: status
+    operator: "!="
+    value: REQUEST
+  - column: result
+    operator: "="
+    value: FAIL
+
+supported_dimensions:
+  - channel
+  - event
+  - workspace
+  - organization
+  - service
+  - template
+  - custom_data
+  - error_code
+  - error_reason
+
+default_dimension:
+  - request_date

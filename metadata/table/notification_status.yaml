@@ -1,0 +1,110 @@
+table_name: notification_status
+business_name: 발송 결과
+
+description: >
+  수신자 단위의 발송 요청과
+  최종 처리 결과를 저장한다.
+
+owner: Sendy
+refresh_cycle: hourly
+
+joins:
+  - table: notifications
+    type: inner
+    purpose: 발송 결과를 조회
+    join_cardinality: many_to_one
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+      - left: status
+        operator: "="
+        right: request_channel_id
+        required: false
+        use_when:
+          - 요청 채널의 결과
+          - 요청 채널의 성공율
+
+  - table: notification_channels
+    type: inner
+    purpose: 발송요청의 채널별 발송 결과를 조회
+    join_cardinality: many_to_one
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+      - left: status
+        operator: "="
+        right: channel_id
+        required: false
+        use_when:
+          - 채널별 조회
+          - 채널별 성공율
+          - 라우팅 분석
+
+  - table: notification_index
+    type: inner
+    purpose: 인덱스 테이블과 조인하여 발송 요청의 상세 정보를 조회
+    join_cardinality: many_to_one
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+
+  - table: recipient
+    type: inner
+    purpose: 수신자 정보로 발송 결과를 조회
+    join_cardinality: many_to_one
+    conditions:
+      - left: notification_id
+        operator: "="
+        right: notification_id
+        required: true
+      - left: custom_message_id
+        operator: "="
+        right: custom_message_id
+        required: true
+
+columns:
+  - name: notification_id
+    business_name: 발송 요청 ID
+    type: string
+    description: 발송 요청의 고유 식별자
+
+  - name: custom_message_id
+    business_name: 고객 메시지 ID
+    type: string
+    description:
+      발송 요청에 대한 수신자 단위의 고유 식별자
+      수신자 번호를 base64로 디코딩 한 후 '.'을 붙이고,뒤에 uuid를 붙여서 고객 메시지 ID를 생성한다.
+
+  - name: status
+    business_name: 처리 상태, 혹은 채널
+    enum:
+      REQUEST: 발송 요청
+      SMS: SMS 발송
+      LMS: LMS 발송
+      MMS: MMS 발송
+      KAKAO-ALIMTALK: 알림톡 발송
+      KAKAO-FRIENDTALK: 친구톡 발송
+      PUSH: 푸시 발송
+      EMAIL: 이메일 발송
+
+  - name: result
+    business_name: 처리 결과
+    enum:
+      SUCCESS: 성공
+      FAIL: 실패
+
+  - name: error_code
+    business_name: 오류 코드
+  - name: error_message
+    business_name: 오류 메시지
+
+  - name: occurred_at
+    business_name: 상태 발생 시각
+    type: string
+    description: 상태가 변경된 UTC 기준 시각

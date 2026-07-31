@@ -1,0 +1,7 @@
+dimension_id: error_reason
+business_name: 에러 사유
+description: >
+  에러 메세지
+mappings:
+  - table: notification_status
+    column: error_message

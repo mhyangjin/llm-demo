@@ -1,0 +1,10 @@
+dimension_id: result
+business_name: 처리 결과
+description: >
+  발송 처리 결과(SUCCESS/FAIL)
+mappings:
+  - table: notification_status
+    column: result
+joins:
+  - notifications
+  - recipient
