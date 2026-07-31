@@ -1,5 +1,0 @@
-dimension_id: error_code
-business_name: 에러 코드
-mappings:
-  - table: notification_status
-    column: error_code
