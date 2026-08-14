@@ -1,4 +1,4 @@
-# Copilot Prompt Guidelines
+# Claude Prompt Guidelines
 
 ## Core Principles
 
